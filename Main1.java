@@ -16,7 +16,7 @@ public class Main1 {
             }
         }*/
         studentRepository.getStudentByID("106");
-        studentRepository.deleteByID("53");
+        studentRepository.deleteByID("53");....
 
 
     }
