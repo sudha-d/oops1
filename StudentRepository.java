@@ -1,5 +1,5 @@
-package com.company;
 
+package Com.Company;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -48,23 +48,32 @@ public class StudentRepository {
         // String query = " select * from student";//
         ResultSet result = statement.executeQuery("select * from student LIMIT 20");
         while (result.next()) {
-            System.out.println(result.getString(1) + " " + " " + result.getString(2) + " " + " " + result.getString(3) + " " + " " + result.getString(4));
+            System.out.println(result.getString(1) + "   " + " " + result.getString(2) + "    " + " " + result.getString(3) + "     " + " " + result.getString(4));
         }
     }
 
-    public void getStudentByID(String id) throws Exception {
+    public Student getStudentByID(String id) throws Exception {
         String query = " select * from student where id = '" + id + "'";
         ResultSet result = statement.executeQuery(query);
-        System.out.println();
-        while (result.next()) {
+        Student student = null;
+       // System.out.println();
+        /*while (result.next()) {
             System.out.println(result.getString(1) + " " + " " + result.getString(2) + " " + " " + result.getString(3) + " " + result.getString(4));
 
+        }*/
+        if (result.next()){
+            student = new Student(result.getString(1),result.getString(2),result.getString(3),result.getString(4));
         }
+        return student;
     }
-    public void deleteByID(String id) throws Exception{
+    public boolean deleteByID(String id) throws Exception{
         PreparedStatement stmt = connection.prepareStatement("delete from student where id=?");
         stmt.setString(1,id);
         int i = stmt.executeUpdate();
-        System.out.println(i + "records deleted");
+       // System.out.println(i + "records deleted");
+        if (i==1)
+            return true;
+        else
+            return false;
     }
 }
